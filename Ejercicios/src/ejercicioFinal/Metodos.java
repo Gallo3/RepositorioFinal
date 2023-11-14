@@ -20,7 +20,7 @@ public class Metodos {
         do {System.out.println();
             System.out.println("MENU");
             System.out.println("1. Alta Productos");
-            System.out.println("2. Opción 2");
+            System.out.println("2. Mostrar elementos del array");
             System.out.println("3. Opción 3");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
@@ -32,7 +32,7 @@ public class Metodos {
                     break;
                 case 2:
                     System.out.println("Ha seleccionado la opción 2.");
-                   
+                    mostrarAtributo(Producto.listaProducto, "descripcion");
                     break;
                 case 3:
                     System.out.println("Ha seleccionado la opción 3.");
@@ -211,21 +211,49 @@ public class Metodos {
 	    }
 	    }
 	
-    public static List<Producto> cargarDesdeArchivo(String nombreArchivo) {
-        List<Producto> productos = new ArrayList<>();
+    public static ArrayList<Producto> cargarDesdeArchivo(String nombreArchivo) {
+        ArrayList<Producto> productos = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 2) {
+                if (partes.length == 8) {
                     int codigo = Integer.parseInt(partes[0]);
                     String codigoCategoria = partes[1];
-                    productos.add(new Lacteo(edad, nombre, nombre, nombre, edad, edad, null, null));
+                    String marca= partes[2];
+                    String descripcion = partes[3];
+                    float precio = Float.parseFloat(partes[4]);
+                    int stock = Integer.parseInt(partes[5]);
+                    LocalDate fechaVencimiento = LocalDate.parse(partes[6]);
+                    LocalDate fechaFabricacion = LocalDate.parse(partes[7]);
+                    productos.add(new Lacteo(codigo, codigoCategoria, marca, descripcion, precio, stock, fechaVencimiento, fechaFabricacion));
+                }else if (partes.length == 7) {
+                	 int codigo = Integer.parseInt(partes[0]);
+                     String codigoCategoria = partes[1];
+                     String marca= partes[2];
+                     String descripcion = partes[3];
+                     float precio = Float.parseFloat(partes[4]);
+                     int stock = Integer.parseInt(partes[5]);
+                     String Material = partes[6];
+                     productos.add(new Regaleria(codigo, codigoCategoria, marca, descripcion, precio, stock, Material));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return personas;
+        return productos;
+    }
+    
+    public static void mostrarAtributo(ArrayList<Producto> productos, String atributo) {
+        for (Producto producto : productos) {
+            switch (atributo.toLowerCase()) {
+                case "descripcion":
+                    System.out.println(producto.getDescripcion());
+                    break;
+               
+                default:
+                    System.out.println("Atributo no válido");
+            }
+        }
     }
 }
