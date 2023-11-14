@@ -1,4 +1,4 @@
-package ejercicioPicante;
+package ejercicioFinal;
 
 public enum CodigoInterno {
 	LACTEO(1), REGALERIA(2);

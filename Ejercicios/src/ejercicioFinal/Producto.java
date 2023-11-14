@@ -1,20 +1,31 @@
-package ejercicioPicante;
+package ejercicioFinal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Producto {
-	private String codigoBarra;
+	public static ArrayList<Producto> listaProducto = new ArrayList<Producto>();
+	private int codigoBarra;
 	private String codigoCategoria;
 	private String marca;
 	private String descripcion;
-	private String precio;
-	private String stock;
+	private float precio;
+	private int stock;
 	private CodigoInterno categoriaProducto;
 	private int codigoInt;
 	public CodigoInterno getCategoriaProducto() {
 		return categoriaProducto;
 	}
-
+	
+	public Producto(int codigoBarra, String codigoCategoria, String marca, String descripcion, float precio, int stock) {
+		this.codigoBarra = codigoBarra;
+		this.codigoCategoria = codigoCategoria;
+		this.marca = marca;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.stock = stock;
+	}
+	
 	public void setCategoriaProducto(CodigoInterno categoriaProducto) {
 		this.categoriaProducto = categoriaProducto;
 	}
@@ -27,20 +38,12 @@ public abstract class Producto {
 		this.codigoInt = codigoInt;
 	}
 
-	public Producto(String codigoBarra, String codigoCategoria, String marca, String descripcion, String precio, String stock) {
-		this.codigoBarra = codigoBarra;
-		this.codigoCategoria = codigoCategoria;
-		this.marca = marca;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.stock = stock;
-	}
-	
-	public String getCodigoBarra() {
+
+	public int getCodigoBarra() {
 		return codigoBarra;
 	}
 
-	public void setCodigoBarra(String codigoBarra) {
+	public void setCodigoBarra(int codigoBarra) {
 		this.codigoBarra = codigoBarra;
 	}
 
@@ -68,24 +71,24 @@ public abstract class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public String getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(String precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
 	public abstract String verTicket();
 	
-	public static ArrayList <Producto> listaProducto = new ArrayList<Producto>();
+	
 	
 }
